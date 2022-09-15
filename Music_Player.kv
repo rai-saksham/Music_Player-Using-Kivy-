@@ -1,0 +1,88 @@
+Player:
+
+<Player>:
+    orientation: "vertical"
+
+    canvas.before:
+        Color:
+            rgba: 0, 0, .1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    Button:
+        id: scan
+        text: 'Scan'
+        pos_hint: {"center_x": .5}
+        width: dp(250)
+        size_hint_x: None
+        pos: root.width-200, root.top-35
+        on_press: root.scan_button()
+
+    ScrollView:
+        size_hint: None, None
+        size: root.width, root.height-135
+        pos: 0, 100
+        StackLayout:
+            size_hint: 1, None
+            height: self.minimum_height
+            id: song_list
+            spacing: 2
+
+    BoxLayout:
+        GridLayout:
+            cols:4
+            size_hint : 0.5, 1
+            Button:
+                id: Previous
+                text: 'Previous'
+                on_press: root.previous_button()
+                #background_normal: "images/minus_button_normal.png"
+                #background_down: "images/minus_button_down.png"
+            Button:
+                id: Play
+                text: 'Play'
+                on_press: root.play_song()
+                #background_normal: "images/play_button_normal.png"
+                #background_down: "images/play_button_down.png"
+            Button:
+                id: Stop
+                text: 'Stop'
+                on_press: root.stop()
+                #background_normal: "images/stop_button_normal.png"
+                #background_down: "images/stop_button_down.png"
+            Button:
+                id: Next
+                text: 'Next'
+                on_press: root.next_button()
+                #background_normal: "images/plus_button_normal.png"
+                #background_down: "images/plus_button_down.png"
+        GridLayout:
+            cols: 3
+            Label:
+                id: current_time
+                text: '00:00'
+                size_hint: 0.2,1
+            Slider:
+                id: progress_bar
+                min: 0
+                max: 100
+                value: 0
+                orientation: "horizontal"
+            Label:
+                id: total_time
+                text: "00:00"
+                size_hint: 0.2,1
+        BoxLayout:
+            size_hint: 0.2, 1
+            Slider:
+                id: vol
+                min: 0
+                max: 100
+                value: 40
+                on_value: root.volume(self)
+                orientation: "horizontal"
+            Label
+                size_hint: 0.2, 1
+                id: current_vol
+                text: '40'
